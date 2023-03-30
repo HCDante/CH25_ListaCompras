@@ -16,10 +16,10 @@ let precioTotal = document.getElementById("precioTotal");
 
 let isValid = true;
 let idTimeout;
-let precio= 0;
-let contador = 0;
-let totalEnProductos = 0
-let costoTotal = 0;
+let precio=0;
+let contador =0;
+let totalEnProductos =0
+let costoTotal =0;
 
 // Limpiar campos
 btnClear.addEventListener("click", function(event){
@@ -64,7 +64,7 @@ btnAgregar.addEventListener("click", function(event){
     isValid = true;
     clearTimeout(idTimeout);
     alertValidacionesTexto.innerHTML="";
-    alertValidacionesTexto.style.display="none";
+    alertValidacionesTexto.style.display="block";
     let lista = "Los siguientes campos deben ser llenados correctamente:<ul>";
     //txtNombre.value = txtNombre.value.trim();
     if (txtNombre.value.length<2){
@@ -124,3 +124,23 @@ txtNombre.addEventListener("blur", function(event){
     event.preventDefault();
     txtNombre.value = txtNombre.value.trim();
 }); //txtNombre.blur
+
+window.addEventListener("load", function(event){
+    if (localStorage.getItem("contadorProductos")==null){
+        localStorage.setItem("contadorProductos","0");
+    }
+    if (localStorage.getItem("totalEnProductos")==null){
+        localStorage.setItem("totalEnProductos","0");
+    } 
+    if (localStorage.getItem("costoTotal")==null){
+        localStorage.setItem("costoTotal","0.0");
+    }
+        contador = parseInt (localStorage.getItem("contadorProductos"));
+    totalEnProductos = parseInt (localStorage.getItem("totalEnProductos"));
+    costoTotal = parseFloat (localStorage.getItem("costoTotal"));
+
+    contadorProductos.innerText=contador;
+    productosTotal.innerText=totalEnProductos;
+    precioTotal.innerText=`$ ${costoTotal}`;
+    
+});
